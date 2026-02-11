@@ -10,14 +10,20 @@ export function StatsGrid() {
     tasks: number;
   }>("stats_grid");
 
-  const valueOrLoading = (val?: number) =>
-    isLoading ? "Loading..." : (val ?? 0);
+  const stats = useMemo(() => {
+    if (!enabled) return [];
 
-  const stats = [
-    { label: "Active projects", value: valueOrLoading(payload?.projects) },
-    { label: "Teams online", value: valueOrLoading(payload?.teams) },
-    { label: "Tasks closed today", value: valueOrLoading(payload?.tasks) },
-  ];
+    const valueOrLoading = (val?: number) =>
+      isLoading ? "Loading..." : (val ?? 0);
+
+    return [
+      { label: "Active projects", value: valueOrLoading(payload?.projects) },
+      { label: "Teams online", value: valueOrLoading(payload?.teams) },
+      { label: "Tasks closed today", value: valueOrLoading(payload?.tasks) },
+    ];
+  }, [enabled, isLoading, payload]);
+
+  if (!enabled) return null;
 
   return (
     <section className="grid gap-4 md:grid-cols-3">
