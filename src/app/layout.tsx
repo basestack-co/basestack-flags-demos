@@ -5,7 +5,8 @@ import {
   FlagsHydrationScript,
   fetchFlags,
 } from "@basestack/flags-react/server";
-import { Providers, flagsConfig } from "@/libs/feature-flags/providers";
+import { Providers } from "@/libs/feature-flags/providers";
+import { flagsConfig } from "@/libs/feature-flags/config";
 
 const manrope = Manrope({
   variable: "--font-manrope",
@@ -33,12 +34,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // Change this to use env variables
-  const flags = await fetchFlags({
-    baseURL: "http://localhost:4000/v1",
-    projectKey: "cmlgz0k5a0001tz8oejdaqjsv",
-    environmentKey: "cmlgz0k5d0003tz8oaatruirp",
-  });
+  const flags = await fetchFlags(flagsConfig);
 
   return (
     <html lang="en">

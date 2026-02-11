@@ -5,6 +5,7 @@ import {
   type InitiativeItem,
 } from "@/components/home/initiative-overview";
 import { PreviewNotes } from "@/components/home/preview-notes";
+import { RuntimeDemos } from "@/components/home/runtime-demos";
 import { StatsGrid } from "@/components/home/stats-grid";
 
 const initiatives: InitiativeItem[] = [
@@ -53,6 +54,7 @@ export default function Home() {
             <PreviewNotes points={previewNotes} />
           </div>
         </section>
+        <RuntimeDemos />
       </div>
     </main>
   );
