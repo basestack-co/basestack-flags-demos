@@ -1,10 +1,24 @@
-const stats = [
-  { label: "Active projects", value: "12" },
-  { label: "Teams online", value: "8 squads" },
-  { label: "Tasks closed today", value: "247" },
-];
+"use client";
+
+import { useFlag } from "@basestack/flags-react/client";
+import { useMemo } from "react";
 
 export function StatsGrid() {
+  const { enabled, payload, isLoading } = useFlag<{
+    projects: number;
+    teams: number;
+    tasks: number;
+  }>("stats_grid");
+
+  const valueOrLoading = (val?: number) =>
+    isLoading ? "Loading..." : (val ?? 0);
+
+  const stats = [
+    { label: "Active projects", value: valueOrLoading(payload?.projects) },
+    { label: "Teams online", value: valueOrLoading(payload?.teams) },
+    { label: "Tasks closed today", value: valueOrLoading(payload?.tasks) },
+  ];
+
   return (
     <section className="grid gap-4 md:grid-cols-3">
       {stats.map((item) => (

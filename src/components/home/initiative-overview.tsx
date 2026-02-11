@@ -63,7 +63,7 @@ export function InitiativeOverview({ items }: InitiativeOverviewProps) {
               </div>
             </article>
           ))
-          .filter((_, index) => index < (enabled ? 2 : 1))}
+          .filter((_, index) => index < (enabled ? 3 : 1))}
       </div>
     </div>
   );
