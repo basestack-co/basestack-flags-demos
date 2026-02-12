@@ -1,14 +1,15 @@
 "use client";
 
+import { useActionState } from "react";
 import {
   runHeaderPolicyAction,
   type ServerActionDemoState,
 } from "@/app/actions/runtime-demo-actions";
-import { useActionState } from "react";
 
 const initialState: ServerActionDemoState = {
   status: "idle",
-  message: "Run a policy check to confirm if the campaign header should be shown.",
+  message:
+    "Run a policy check to confirm if the campaign header should be shown.",
   surface: "Homepage",
   checkedAt: null,
   flag: null,
@@ -26,16 +27,24 @@ export function ServerActionDemo() {
         <p className="inline-flex rounded-full border border-border bg-surface-soft px-3 py-1 text-xs uppercase tracking-[0.12em] text-foreground/80">
           Direct Policy Check
         </p>
-        <h3 className="font-display text-3xl leading-tight">Campaign Header Control</h3>
+        <h3 className="font-display text-3xl leading-tight">
+          Campaign Header Control
+        </h3>
         <p className="max-w-xl text-sm leading-6 text-foreground/80">
-          Product teams use this flow to evaluate a live toggle before publishing a banner. It checks the current flag and
-          returns a ready-to-use visibility decision.
+          Product teams use this flow to evaluate a live toggle before
+          publishing a banner. It checks the current flag and returns a
+          ready-to-use visibility decision.
         </p>
       </div>
 
-      <form action={formAction} className="grid gap-5 rounded-xl border border-border bg-surface-soft p-4">
+      <form
+        action={formAction}
+        className="grid gap-5 rounded-xl border border-border bg-surface-soft p-4"
+      >
         <label className="space-y-2">
-          <span className="text-xs font-semibold uppercase tracking-[0.12em] text-foreground/75">Display Surface</span>
+          <span className="text-xs font-semibold uppercase tracking-[0.12em] text-foreground/75">
+            Display Surface
+          </span>
           <select
             name="surface"
             defaultValue={state.surface}
@@ -48,7 +57,9 @@ export function ServerActionDemo() {
         </label>
 
         <label className="space-y-2">
-          <span className="text-xs font-semibold uppercase tracking-[0.12em] text-foreground/75">Flag Slug</span>
+          <span className="text-xs font-semibold uppercase tracking-[0.12em] text-foreground/75">
+            Flag Slug
+          </span>
           <input
             name="flagSlug"
             defaultValue={state.flag?.slug ?? "header"}
@@ -77,21 +88,31 @@ export function ServerActionDemo() {
         {state.flag && (
           <div className="mt-4 grid gap-2 sm:grid-cols-2">
             <div className="rounded-lg border border-border bg-surface p-3">
-              <p className="font-mono text-xs uppercase tracking-[0.08em]">Flag</p>
+              <p className="font-mono text-xs uppercase tracking-[0.08em]">
+                Flag
+              </p>
               <p className="mt-1 text-sm font-semibold">{state.flag.slug}</p>
             </div>
             <div className="rounded-lg border border-border bg-surface p-3">
-              <p className="font-mono text-xs uppercase tracking-[0.08em]">Status</p>
+              <p className="font-mono text-xs uppercase tracking-[0.08em]">
+                Status
+              </p>
               <p className="mt-1 text-sm font-semibold">
                 {state.flag.enabled ? "Visible" : "Hidden"}
               </p>
             </div>
             <div className="rounded-lg border border-border bg-surface p-3 sm:col-span-2">
-              <p className="font-mono text-xs uppercase tracking-[0.08em]">Description</p>
-              <p className="mt-1 text-sm text-foreground/85">{state.flag.description}</p>
+              <p className="font-mono text-xs uppercase tracking-[0.08em]">
+                Description
+              </p>
+              <p className="mt-1 text-sm text-foreground/85">
+                {state.flag.description}
+              </p>
             </div>
             <div className="rounded-lg border border-border bg-surface p-3 sm:col-span-2">
-              <p className="font-mono text-xs uppercase tracking-[0.08em]">Payload</p>
+              <p className="font-mono text-xs uppercase tracking-[0.08em]">
+                Payload
+              </p>
               <pre className="mt-2 overflow-auto text-xs leading-5 text-foreground/85">
                 {JSON.stringify(state.flag.payload ?? {}, null, 2)}
               </pre>

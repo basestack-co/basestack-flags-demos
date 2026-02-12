@@ -1,11 +1,11 @@
 "use client";
 
-import type { ReactNode } from "react";
 import type { Flag } from "@basestack/flags-react";
 import {
-  FlagsProvider,
   FeatureFlagModalsProvider,
+  FlagsProvider,
 } from "@basestack/flags-react/client";
+import type { ReactNode } from "react";
 import { flagsConfig, flagsWcConfig } from "./config";
 
 export interface ProvidersProps {

@@ -1,8 +1,8 @@
 import { ChannelMix, type ChannelMixItem } from "@/components/home/channel-mix";
 import { HeroSection } from "@/components/home/hero-section";
 import {
-  InitiativeOverview,
   type InitiativeItem,
+  InitiativeOverview,
 } from "@/components/home/initiative-overview";
 import { PreviewNotes } from "@/components/home/preview-notes";
 import { RuntimeDemos } from "@/components/home/runtime-demos";

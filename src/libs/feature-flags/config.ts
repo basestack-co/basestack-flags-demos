@@ -1,6 +1,6 @@
-import {
-  type FeatureFlagModalsConfig,
-  type SDKConfig,
+import type {
+  FeatureFlagModalsConfig,
+  SDKConfig,
 } from "@basestack/flags-react/client";
 
 // Change this to use env variables

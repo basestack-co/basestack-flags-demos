@@ -16,7 +16,9 @@ type RouteHandlerResponse = {
   checkedAt: string;
 };
 
-const isRouteHandlerResponse = (value: unknown): value is RouteHandlerResponse => {
+const isRouteHandlerResponse = (
+  value: unknown,
+): value is RouteHandlerResponse => {
   if (!value || typeof value !== "object") return false;
   return "flag" in value && "message" in value && "checkedAt" in value;
 };
@@ -31,7 +33,9 @@ export function ApiRouteHandlerDemo() {
     setError(null);
 
     try {
-      const response = await fetch("/api/route-handler-demo", { cache: "no-store" });
+      const response = await fetch("/api/route-handler-demo", {
+        cache: "no-store",
+      });
       const payload = (await response.json()) as unknown;
 
       if (!response.ok || !isRouteHandlerResponse(payload)) {
@@ -55,7 +59,8 @@ export function ApiRouteHandlerDemo() {
         </p>
         <h3 className="font-display text-3xl leading-tight">Shared Flag API</h3>
         <p className="max-w-xl text-sm leading-6 text-foreground/80">
-          Internal tools call this endpoint to read current release rules and stay consistent with the customer-facing app.
+          Internal tools call this endpoint to read current release rules and
+          stay consistent with the customer-facing app.
         </p>
       </div>
 
@@ -76,25 +81,41 @@ export function ApiRouteHandlerDemo() {
 
         {data && (
           <div className="space-y-3">
-            <p className="text-sm font-semibold text-foreground">{data.message}</p>
+            <p className="text-sm font-semibold text-foreground">
+              {data.message}
+            </p>
             <div className="grid gap-2 sm:grid-cols-2">
               <p className="rounded-lg border border-border bg-surface px-3 py-2 text-sm">
-                <span className="font-mono text-xs uppercase tracking-[0.08em] text-foreground/70">Flag</span>
-                <span className="mt-1 block font-semibold">{data.flag.slug}</span>
+                <span className="font-mono text-xs uppercase tracking-[0.08em] text-foreground/70">
+                  Flag
+                </span>
+                <span className="mt-1 block font-semibold">
+                  {data.flag.slug}
+                </span>
               </p>
               <p className="rounded-lg border border-border bg-surface px-3 py-2 text-sm">
-                <span className="font-mono text-xs uppercase tracking-[0.08em] text-foreground/70">Status</span>
-                <span className="mt-1 block font-semibold">{data.flag.enabled ? "Visible" : "Hidden"}</span>
+                <span className="font-mono text-xs uppercase tracking-[0.08em] text-foreground/70">
+                  Status
+                </span>
+                <span className="mt-1 block font-semibold">
+                  {data.flag.enabled ? "Visible" : "Hidden"}
+                </span>
               </p>
             </div>
 
             <div className="rounded-lg border border-border bg-surface p-3">
-              <p className="font-mono text-xs uppercase tracking-[0.08em]">Description</p>
-              <p className="mt-2 text-sm text-foreground/85">{data.flag.description}</p>
+              <p className="font-mono text-xs uppercase tracking-[0.08em]">
+                Description
+              </p>
+              <p className="mt-2 text-sm text-foreground/85">
+                {data.flag.description}
+              </p>
             </div>
 
             <div className="rounded-lg border border-border bg-surface p-3">
-              <p className="font-mono text-xs uppercase tracking-[0.08em]">Payload</p>
+              <p className="font-mono text-xs uppercase tracking-[0.08em]">
+                Payload
+              </p>
               <pre className="mt-2 overflow-auto text-xs leading-5 text-foreground/85">
                 {JSON.stringify(data.flag.payload ?? {}, null, 2)}
               </pre>

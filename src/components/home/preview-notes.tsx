@@ -17,9 +17,7 @@ export function PreviewNotes({ points }: PreviewNotesProps) {
     <aside className="panel rounded-2xl p-6">
       <div className="mb-5 flex items-center justify-between">
         <button
-          onClick={() =>
-            openFeedbackModal({ featureName: "Preview Notes" })
-          }
+          onClick={() => openFeedbackModal({ featureName: "Preview Notes" })}
           disabled={isLoading}
           className="rounded-full bg-accent-soft px-3 py-1 text-xs font-semibold text-accent"
         >

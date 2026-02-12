@@ -1,7 +1,7 @@
 "use server";
 
+import { type Flag, fetchFlag } from "@basestack/flags-react/server";
 import { flagsConfig } from "@/libs/feature-flags/config";
-import { fetchFlag, type Flag } from "@basestack/flags-react/server";
 
 export type ServerActionDemoState = {
   status: "idle" | "success" | "error";

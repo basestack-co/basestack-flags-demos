@@ -1,5 +1,5 @@
-import { NextResponse } from "next/server";
 import { fetchFlag } from "@basestack/flags-react/server";
+import { NextResponse } from "next/server";
 import { flagsConfig } from "@/libs/feature-flags/config";
 
 export async function GET() {

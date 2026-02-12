@@ -5,8 +5,8 @@ import {
   FlagsHydrationScript,
   fetchFlags,
 } from "@basestack/flags-react/server";
-import { Providers } from "@/libs/feature-flags/providers";
 import { flagsConfig } from "@/libs/feature-flags/config";
+import { Providers } from "@/libs/feature-flags/providers";
 
 const manrope = Manrope({
   variable: "--font-manrope",
