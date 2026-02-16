@@ -5,7 +5,15 @@ import {
   FeatureFlagModalsProvider,
   FlagsProvider,
 } from "@basestack/flags-react/client";
-import type { ReactNode } from "react";
+import {
+  createContext,
+  type ReactNode,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
+import type { ThemeMode } from "./config";
 import { flagsConfig, flagsWcConfig } from "./config";
 
 export interface ProvidersProps {
@@ -13,7 +21,43 @@ export interface ProvidersProps {
   initialFlags?: Flag[];
 }
 
+interface ThemeContextValue {
+  theme: ThemeMode;
+  toggleTheme: () => void;
+}
+
+const ThemeContext = createContext<ThemeContextValue | null>(null);
+
+export function useTheme(): ThemeContextValue {
+  const context = useContext(ThemeContext);
+
+  if (!context) {
+    throw new Error("useTheme must be used within Providers");
+  }
+
+  return context;
+}
+
 export function Providers({ children, initialFlags }: ProvidersProps) {
+  const [theme, setTheme] = useState<ThemeMode>("light");
+
+  const modalConfig = useMemo(() => flagsWcConfig(theme), [theme]);
+
+  const themeContextValue = useMemo(
+    () => ({
+      theme,
+      toggleTheme: () =>
+        setTheme((currentTheme) =>
+          currentTheme === "light" ? "dark" : "light",
+        ),
+    }),
+    [theme],
+  );
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+  }, [theme]);
+
   return (
     <FlagsProvider
       config={flagsConfig}
@@ -21,10 +65,12 @@ export function Providers({ children, initialFlags }: ProvidersProps) {
       preload={!initialFlags?.length}
     >
       <FeatureFlagModalsProvider
-        config={flagsWcConfig}
+        config={modalConfig}
         onError={(err) => console.error("[FeatureFlagModals]", err)}
       >
-        {children}
+        <ThemeContext.Provider value={themeContextValue}>
+          {children}
+        </ThemeContext.Provider>
       </FeatureFlagModalsProvider>
     </FlagsProvider>
   );

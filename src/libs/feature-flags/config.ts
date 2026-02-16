@@ -3,6 +3,8 @@ import type {
   SDKConfig,
 } from "@basestack/flags-react/client";
 
+export type ThemeMode = "light" | "dark";
+
 // Change this to use env variables
 export const flagsConfig: SDKConfig = {
   baseURL: "http://localhost:4000/v1",
@@ -10,9 +12,9 @@ export const flagsConfig: SDKConfig = {
   environmentKey: "cmlgz0k5d0003tz8oaatruirp",
 };
 
-export const flagsWcConfig: FeatureFlagModalsConfig = {
+export const flagsWcConfig = (theme: ThemeMode): FeatureFlagModalsConfig => ({
   preview: {
-    theme: "light",
+    theme,
     heading: "Feature Preview",
     subtitle: "Select and enable previews that fit your workflow.",
     selectionPrompt: "Choose a preview to view",
@@ -26,7 +28,7 @@ export const flagsWcConfig: FeatureFlagModalsConfig = {
     learnMoreLabel: "Learn more",
   },
   feedback: {
-    theme: "light",
+    theme,
     heading: "Feedback",
     moodPrompt: "How did this feature make you feel?",
     ratingPrompt: "How would you rate this feature?",
@@ -37,4 +39,4 @@ export const flagsWcConfig: FeatureFlagModalsConfig = {
     privacyPolicyLabel: "Please avoid adding sensitive/personal information.",
     privacyPolicyLinkLabel: "More details",
   },
-};
+});

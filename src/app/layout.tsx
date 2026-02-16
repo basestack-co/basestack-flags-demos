@@ -37,7 +37,7 @@ export default async function RootLayout({
   const flags = await fetchFlags(flagsConfig);
 
   return (
-    <html lang="en">
+    <html lang="en" data-theme="light">
       <head>
         <link rel="icon" href="/favicon.svg" type="image/svg+xml"></link>
       </head>

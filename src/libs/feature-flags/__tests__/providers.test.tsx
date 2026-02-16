@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import type { ReactNode } from "react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
@@ -25,11 +25,30 @@ vi.mock("@basestack/flags-react/client", () => ({
   },
 }));
 
-import { Providers } from "@/libs/feature-flags/providers";
+import { Providers, useTheme } from "@/libs/feature-flags/providers";
+
+function ThemeProbe() {
+  const { theme, toggleTheme } = useTheme();
+
+  return (
+    <>
+      <span data-testid="theme-value">{theme}</span>
+      <button type="button" onClick={toggleTheme}>
+        toggle
+      </button>
+    </>
+  );
+}
+
+function ThemeProbeOutsideProvider() {
+  useTheme();
+  return null;
+}
 
 describe("Providers", () => {
   afterEach(() => {
     vi.clearAllMocks();
+    document.documentElement.removeAttribute("data-theme");
   });
 
   it("uses preload when initial flags are missing", () => {
@@ -42,6 +61,14 @@ describe("Providers", () => {
     expect(screen.getByText("child")).toBeInTheDocument();
     expect(flagsProviderMock).toHaveBeenCalledWith(
       expect.objectContaining({ preload: true }),
+    );
+    expect(modalsProviderMock).toHaveBeenCalledWith(
+      expect.objectContaining({
+        config: expect.objectContaining({
+          preview: expect.objectContaining({ theme: "light" }),
+          feedback: expect.objectContaining({ theme: "light" }),
+        }),
+      }),
     );
   });
 
@@ -72,6 +99,59 @@ describe("Providers", () => {
     onError(new Error("boom"));
 
     expect(spy).toHaveBeenCalledWith("[FeatureFlagModals]", expect.any(Error));
+    spy.mockRestore();
+  });
+
+  it("toggles theme state and keeps modal config in sync", async () => {
+    render(
+      <Providers>
+        <ThemeProbe />
+      </Providers>,
+    );
+
+    await waitFor(() =>
+      expect(document.documentElement.getAttribute("data-theme")).toBe("light"),
+    );
+    expect(screen.getByTestId("theme-value")).toHaveTextContent("light");
+
+    fireEvent.click(screen.getByRole("button", { name: "toggle" }));
+
+    await waitFor(() =>
+      expect(document.documentElement.getAttribute("data-theme")).toBe("dark"),
+    );
+    expect(screen.getByTestId("theme-value")).toHaveTextContent("dark");
+    expect(modalsProviderMock).toHaveBeenLastCalledWith(
+      expect.objectContaining({
+        config: expect.objectContaining({
+          preview: expect.objectContaining({ theme: "dark" }),
+          feedback: expect.objectContaining({ theme: "dark" }),
+        }),
+      }),
+    );
+
+    fireEvent.click(screen.getByRole("button", { name: "toggle" }));
+
+    await waitFor(() =>
+      expect(document.documentElement.getAttribute("data-theme")).toBe("light"),
+    );
+    expect(screen.getByTestId("theme-value")).toHaveTextContent("light");
+    expect(modalsProviderMock).toHaveBeenLastCalledWith(
+      expect.objectContaining({
+        config: expect.objectContaining({
+          preview: expect.objectContaining({ theme: "light" }),
+          feedback: expect.objectContaining({ theme: "light" }),
+        }),
+      }),
+    );
+  });
+
+  it("throws when useTheme is called outside Providers", () => {
+    const spy = vi.spyOn(console, "error").mockImplementation(() => {});
+
+    expect(() => render(<ThemeProbeOutsideProvider />)).toThrow(
+      "useTheme must be used within Providers",
+    );
+
     spy.mockRestore();
   });
 });
