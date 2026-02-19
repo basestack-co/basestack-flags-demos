@@ -25,7 +25,20 @@ export function InitiativeOverview({ items }: InitiativeOverviewProps) {
         {enabled && (
           <button
             onClick={() =>
-              openFeedbackModal({ featureName: "Initiative Overview" })
+              openFeedbackModal({
+                featureName: "Initiative Overview",
+                metadata: {
+                  user_id: "123",
+                  user_name: "John Doe",
+                  user_email: "john.doe@example.com",
+                  user_role: "admin",
+                  user_organization: "Example Inc.",
+                  user_organization_id: "123",
+                  user_organization_name: "Example Inc.",
+                  user_organization_role: "admin",
+                  user_organization_email: "admin@example.com",
+                },
+              })
             }
             disabled={isLoading}
             className="rounded-full bg-accent-soft px-3 py-1 text-xs font-semibold text-accent"
