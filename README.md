@@ -1,47 +1,120 @@
-# OpenNext Starter
+# Basestack Flags Demos
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Interactive demo project showing how to use `@basestack/flags-react` in a Next.js App Router app with OpenNext deployment to Cloudflare Workers.
 
-## Getting Started
+## What This Project Demonstrates
 
-Read the documentation at https://opennext.js.org/cloudflare.
+- Server-side flag preloading with `fetchFlags` in the root layout.
+- Client-side flag consumption with `useFlag`.
+- Feature preview modal (`openPreviewModal`) and feedback modal (`openFeedbackModal`).
+- Runtime checks through:
+  - a Server Action (`runHeaderPolicyAction`)
+  - a Route Handler (`/api/route-handler-demo`)
+- Cloudflare-ready build, preview, upload, and deploy scripts via OpenNext.
 
-## Develop
+## Stack
 
-Run the Next.js development server:
+- Next.js 16 (App Router)
+- React 19
+- Tailwind CSS 4
+- `@basestack/flags-react`
+- OpenNext Cloudflare (`@opennextjs/cloudflare`)
+- Vitest + Testing Library
+- Biome (lint/format)
+
+## Prerequisites
+
+- Node.js `>= 20`
+- Bun (the repo uses `bun.lock` and `packageManager: bun@1.3.10`)
+- A Basestack project/environment with valid API credentials
+- Cloudflare account + Wrangler auth for preview/deploy workflows
+
+## Environment Variables
+
+Create a local env file (for example `.env.local`) with:
 
 ```bash
-npm run dev
-# or similar package manager command
+NEXT_PUBLIC_BASE_URL=""
+NEXT_PUBLIC_PROJECT_KEY=""
+NEXT_PUBLIC_ENVIRONMENT_KEY=""
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+These are required by `src/libs/feature-flags/config.ts`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-## Preview
-
-Preview the application locally on the Cloudflare runtime:
+## Install
 
 ```bash
-npm run preview
-# or similar package manager command
+bun install
 ```
 
-## Deploy
-
-Deploy the application to Cloudflare:
+## Run Locally (Next.js Dev Server)
 
 ```bash
-npm run deploy
-# or similar package manager command
+bun run dev
 ```
 
-## Learn More
+App runs at [http://localhost:3000](http://localhost:3000).
 
-To learn more about Next.js, take a look at the following resources:
+## Demo Flag Slugs Used in UI
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `stats_grid` - controls the stats cards section.
+- `initiative_overview` - controls expanded initiative list and feedback action.
+- `preview_notes` - controls the preview notes panel.
+- `header` - used by the server action policy check.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Runtime Demo Endpoints
+
+- Server Action: `src/app/actions/runtime-demo-actions.ts`
+- Route Handler: `GET /api/route-handler-demo`
+
+The route returns current flag status and metadata for `stats_grid`.
+
+## Scripts
+
+- `bun run dev` - start local Next.js dev server
+- `bun run build` - Next.js production build
+- `bun run start` - serve production build locally
+- `bun run test` - run Vitest with coverage
+- `bun run test:watch` - run Vitest in watch mode
+- `bun run lint` - Biome lint
+- `bun run lint:fix` - Biome lint with fixes
+- `bun run format` - Biome format
+- `bun run check` - Biome check with writes
+- `bun run cf-typegen` - regenerate `cloudflare-env.d.ts`
+- `bun run preview` - OpenNext Cloudflare local preview
+- `bun run upload` - OpenNext Cloudflare upload
+- `bun run deploy` - OpenNext Cloudflare deploy
+
+## Cloudflare Preview and Deploy
+
+Preview the Worker runtime locally:
+
+```bash
+bun run preview
+```
+
+Deploy to Cloudflare:
+
+```bash
+bun run deploy
+```
+
+The worker configuration is in `wrangler.jsonc` and OpenNext config is in `open-next.config.ts`.
+
+## Testing
+
+Run the full test suite:
+
+```bash
+bun run test
+```
+
+Component and runtime behavior are covered in:
+
+- `src/components/home/__tests__`
+- `src/app/actions/__tests__`
+- `src/app/api/route-handler-demo/__tests__`
+
+## License
+
+[MIT](./LICENSE)
