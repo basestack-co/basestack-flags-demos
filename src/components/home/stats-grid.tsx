@@ -13,8 +13,7 @@ export function StatsGrid() {
   const stats = useMemo(() => {
     if (!enabled) return [];
 
-    const valueOrLoading = (val?: number) =>
-      isLoading ? "Loading..." : (val ?? 0);
+    const valueOrLoading = (val?: number) => (isLoading ? "—" : (val ?? 0));
 
     return [
       { label: "Active projects", value: valueOrLoading(payload?.projects) },
@@ -28,11 +27,17 @@ export function StatsGrid() {
   return (
     <section className="grid gap-4 md:grid-cols-3">
       {stats.map((item) => (
-        <div key={item.label} className="panel rounded-2xl p-5">
-          <p className="text-xs uppercase tracking-[0.12em] text-foreground/70">
+        <div
+          key={item.label}
+          className="panel relative overflow-hidden rounded-2xl p-5"
+        >
+          <div className="absolute inset-x-0 top-0 h-px bg-accent opacity-50" />
+          <p className="text-xs font-medium uppercase tracking-widest text-muted">
             {item.label}
           </p>
-          <p className="mt-2 text-3xl font-semibold">{item.value}</p>
+          <p className="mt-3 font-mono text-4xl font-semibold tabular-nums">
+            {item.value}
+          </p>
         </div>
       ))}
     </section>

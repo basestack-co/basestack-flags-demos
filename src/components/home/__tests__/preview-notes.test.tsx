@@ -45,7 +45,7 @@ describe("PreviewNotes", () => {
 
     expect(screen.getByText("Preview Notes")).toBeInTheDocument();
     expect(screen.getByText("First")).toBeInTheDocument();
-    fireEvent.click(screen.getByText("Give Feedback (Click Here)"));
+    fireEvent.click(screen.getByRole("button", { name: "Give Feedback" }));
     expect(openFeedbackModal).toHaveBeenCalledWith({
       featureName: "Preview Notes",
     });

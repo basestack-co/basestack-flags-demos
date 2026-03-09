@@ -35,10 +35,10 @@ describe("HeroSection", () => {
 
     render(<HeroSection />);
 
-    expect(screen.getByText("Loading...")).toBeDisabled();
+    expect(screen.getByRole("button", { name: "Loading..." })).toBeDisabled();
     expect(
       screen.getByRole("switch", { name: "Toggle dark mode" }),
-    ).toHaveTextContent("Light mode");
+    ).toHaveTextContent("Dark");
   });
 
   it("opens preview modal when ready", () => {
@@ -56,7 +56,7 @@ describe("HeroSection", () => {
 
     render(<HeroSection />);
 
-    const button = screen.getByText("Feature Preview (Click Here)");
+    const button = screen.getByRole("button", { name: "Feature Preview" });
     fireEvent.click(button);
     expect(openPreviewModal).toHaveBeenCalledTimes(1);
   });
@@ -79,7 +79,7 @@ describe("HeroSection", () => {
     const switchButton = screen.getByRole("switch", {
       name: "Toggle dark mode",
     });
-    expect(switchButton).toHaveTextContent("Dark mode");
+    expect(switchButton).toHaveTextContent("Light");
 
     fireEvent.click(switchButton);
     expect(toggleTheme).toHaveBeenCalledTimes(1);

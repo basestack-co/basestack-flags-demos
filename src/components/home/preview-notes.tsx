@@ -15,19 +15,25 @@ export function PreviewNotes({ points }: PreviewNotesProps) {
 
   return (
     <aside className="panel rounded-2xl p-6">
-      <div className="mb-5 flex items-center justify-between">
+      <div className="mb-4 flex items-center justify-between">
+        <h2 className="text-sm font-semibold uppercase tracking-widest text-muted">
+          Preview Notes
+        </h2>
         <button
           onClick={() => openFeedbackModal({ featureName: "Preview Notes" })}
           disabled={isLoading}
-          className="rounded-full bg-accent-soft px-3 py-1 text-xs font-semibold text-accent"
+          className="cursor-pointer text-xs text-accent hover:underline disabled:opacity-50"
         >
-          Give Feedback (Click Here)
-        </button>{" "}
+          Give Feedback
+        </button>
       </div>
-      <h2 className="font-display text-2xl">Preview Notes</h2>
-      <ul className="mt-4 space-y-2 text-sm text-foreground/80">
+      <ul className="space-y-3">
         {points.map((point) => (
-          <li key={point} className="rounded-lg bg-surface-soft p-3">
+          <li
+            key={point}
+            className="flex items-start gap-2.5 text-sm text-muted"
+          >
+            <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-border" />
             {point}
           </li>
         ))}

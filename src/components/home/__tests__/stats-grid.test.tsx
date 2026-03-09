@@ -42,7 +42,7 @@ describe("StatsGrid", () => {
 
     render(<StatsGrid />);
 
-    expect(screen.getAllByText("Loading...")).toHaveLength(3);
+    expect(screen.getAllByText("—")).toHaveLength(3);
   });
 
   it("renders resolved stats and defaults missing values to zero", () => {

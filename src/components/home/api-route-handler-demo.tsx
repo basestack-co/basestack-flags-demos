@@ -53,12 +53,12 @@ export function ApiRouteHandlerDemo() {
 
   return (
     <article className="panel rounded-2xl p-6 md:p-7">
-      <div className="mb-6 space-y-3">
-        <p className="inline-flex rounded-full border border-border bg-surface-soft px-3 py-1 text-xs uppercase tracking-[0.12em] text-foreground/80">
+      <div className="mb-6 space-y-2">
+        <span className="inline-flex items-center rounded-md border border-border bg-surface-soft px-2.5 py-1 text-xs font-medium uppercase tracking-wide text-muted">
           Backend Endpoint Check
-        </p>
+        </span>
         <h3 className="font-display text-3xl leading-tight">Shared Flag API</h3>
-        <p className="max-w-xl text-sm leading-6 text-foreground/80">
+        <p className="max-w-xl text-sm leading-relaxed text-muted">
           Internal tools call this endpoint to read current release rules and
           stay consistent with the customer-facing app.
         </p>
@@ -68,60 +68,60 @@ export function ApiRouteHandlerDemo() {
         <button
           onClick={fetchRouteData}
           disabled={isLoading}
-          className="cursor-pointer rounded-full bg-foreground px-4 py-2 text-sm font-semibold text-background transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-70"
+          className="cursor-pointer rounded-lg bg-foreground px-4 py-2.5 text-sm font-semibold text-background transition hover:opacity-85 disabled:cursor-not-allowed disabled:opacity-60"
         >
           {isLoading ? "Loading live status..." : "Load live status"}
         </button>
 
         {error && (
-          <p className="rounded-lg border border-warning/40 bg-warning-soft p-3 text-sm text-warning">
+          <p className="rounded-lg border border-warning/30 bg-warning-soft px-3 py-2.5 text-sm text-warning">
             {error}
           </p>
         )}
 
         {data && (
-          <div className="space-y-3">
-            <p className="text-sm font-semibold text-foreground">
+          <div className="space-y-2">
+            <p className="text-sm font-medium text-foreground/80">
               {data.message}
             </p>
             <div className="grid gap-2 sm:grid-cols-2">
-              <p className="rounded-lg border border-border bg-surface px-3 py-2 text-sm">
-                <span className="font-mono text-xs uppercase tracking-[0.08em] text-foreground/70">
+              <div className="rounded-lg border border-border bg-surface p-3">
+                <p className="font-mono text-xs uppercase tracking-wide text-muted">
                   Flag
-                </span>
-                <span className="mt-1 block font-semibold">
-                  {data.flag.slug}
-                </span>
-              </p>
-              <p className="rounded-lg border border-border bg-surface px-3 py-2 text-sm">
-                <span className="font-mono text-xs uppercase tracking-[0.08em] text-foreground/70">
+                </p>
+                <p className="mt-1 text-sm font-semibold">{data.flag.slug}</p>
+              </div>
+              <div className="rounded-lg border border-border bg-surface p-3">
+                <p className="font-mono text-xs uppercase tracking-wide text-muted">
                   Status
-                </span>
-                <span className="mt-1 block font-semibold">
+                </p>
+                <p
+                  className={`mt-1 text-sm font-semibold ${data.flag.enabled ? "text-accent" : "text-muted"}`}
+                >
                   {data.flag.enabled ? "Visible" : "Hidden"}
-                </span>
-              </p>
+                </p>
+              </div>
             </div>
 
             <div className="rounded-lg border border-border bg-surface p-3">
-              <p className="font-mono text-xs uppercase tracking-[0.08em]">
+              <p className="font-mono text-xs uppercase tracking-wide text-muted">
                 Description
               </p>
-              <p className="mt-2 text-sm text-foreground/85">
+              <p className="mt-1 text-sm text-foreground/80">
                 {data.flag.description}
               </p>
             </div>
 
             <div className="rounded-lg border border-border bg-surface p-3">
-              <p className="font-mono text-xs uppercase tracking-[0.08em]">
+              <p className="font-mono text-xs uppercase tracking-wide text-muted">
                 Payload
               </p>
-              <pre className="mt-2 overflow-auto text-xs leading-5 text-foreground/85">
+              <pre className="mt-2 overflow-auto font-mono text-xs leading-5 text-foreground/80">
                 {JSON.stringify(data.flag.payload ?? {}, null, 2)}
               </pre>
             </div>
 
-            <p className="font-mono text-xs text-foreground/70">
+            <p className="font-mono text-xs text-muted">
               Checked at {new Date(data.checkedAt).toLocaleString()}
             </p>
           </div>

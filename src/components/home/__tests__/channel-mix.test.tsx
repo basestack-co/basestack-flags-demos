@@ -14,7 +14,9 @@ describe("ChannelMix", () => {
     );
 
     expect(screen.getByText("Channel Mix")).toBeInTheDocument();
-    expect(screen.getByText("30% traffic share")).toBeInTheDocument();
-    expect(screen.getByText("70% traffic share")).toBeInTheDocument();
+    expect(screen.getByText("30%")).toBeInTheDocument();
+    expect(screen.getByText("70%")).toBeInTheDocument();
+    expect(screen.getByText("Organic")).toBeInTheDocument();
+    expect(screen.getByText("Paid")).toBeInTheDocument();
   });
 });

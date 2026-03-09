@@ -16,6 +16,21 @@ const items = [
   { name: "Three", description: "D3", status: "done", progress: "30%" },
 ];
 
+const statusVariantItems = [
+  {
+    name: "Launch",
+    description: "D4",
+    status: "in progress",
+    progress: "40%",
+  },
+  {
+    name: "Recovery",
+    description: "D5",
+    status: "on hold",
+    progress: "50%",
+  },
+];
+
 describe("InitiativeOverview", () => {
   afterEach(() => {
     vi.clearAllMocks();
@@ -35,9 +50,7 @@ describe("InitiativeOverview", () => {
 
     expect(screen.getByText("One")).toBeInTheDocument();
     expect(screen.queryByText("Two")).not.toBeInTheDocument();
-    expect(
-      screen.queryByText("Give Feedback (Click Here)"),
-    ).not.toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: "Give Feedback" })).toBeNull();
   });
 
   it("shows all top items and opens feedback when enabled", () => {
@@ -54,7 +67,7 @@ describe("InitiativeOverview", () => {
     render(<InitiativeOverview items={items} />);
 
     expect(screen.getByText("Three")).toBeInTheDocument();
-    fireEvent.click(screen.getByText("Give Feedback (Click Here)"));
+    fireEvent.click(screen.getByRole("button", { name: "Give Feedback" }));
     expect(openFeedbackModal).toHaveBeenCalledWith({
       featureName: "Initiative Overview",
       metadata: {
@@ -69,5 +82,29 @@ describe("InitiativeOverview", () => {
         user_organization_email: "admin@example.com",
       },
     });
+  });
+
+  it("applies status styling for in-progress and on-hold items", () => {
+    useFlagMock.mockReturnValue({
+      enabled: true,
+      payload: { variant: "x" },
+      error: null,
+      refresh: vi.fn(),
+      isLoading: false,
+      openFeedbackModal: vi.fn(),
+    });
+
+    render(<InitiativeOverview items={statusVariantItems} />);
+
+    expect(screen.getByText("in progress")).toHaveClass(
+      "bg-accent-soft",
+      "text-accent",
+      "border-accent/20",
+    );
+    expect(screen.getByText("on hold")).toHaveClass(
+      "bg-warning-soft",
+      "text-warning",
+      "border-warning/20",
+    );
   });
 });

@@ -3,12 +3,15 @@ import { ServerActionDemo } from "@/components/home/server-action-demo";
 
 export function RuntimeDemos() {
   return (
-    <section className="space-y-4">
+    <section className="space-y-5">
       <div className="px-1">
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
-          Product Rollout Controls
-        </p>
-        <h2 className="font-display mt-2 text-3xl md:text-4xl">
+        <div className="mb-2 flex items-center gap-2">
+          <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+          <p className="text-xs font-semibold uppercase tracking-widest text-accent">
+            Product Rollout Controls
+          </p>
+        </div>
+        <h2 className="font-display text-3xl md:text-4xl">
           Live Toggle Workflows
         </h2>
       </div>
