@@ -6,8 +6,6 @@ export async function GET() {
   try {
     const flag = await fetchFlag("stats_grid", flagsConfig);
 
-    console.log(flag);
-
     return NextResponse.json({
       flag: {
         slug: flag.slug,

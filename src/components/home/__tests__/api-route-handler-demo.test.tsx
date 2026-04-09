@@ -111,4 +111,32 @@ describe("ApiRouteHandlerDemo", () => {
       ).toBeInTheDocument();
     });
   });
+
+  it("shows error when response is not ok regardless of payload shape", async () => {
+    vi.spyOn(globalThis, "fetch").mockResolvedValue({
+      ok: false,
+      json: async () => ({
+        flag: {
+          slug: "stats_grid",
+          enabled: true,
+          description: "demo",
+          payload: null,
+          createdAt: "2025-01-01T00:00:00.000Z",
+          updatedAt: "2025-01-01T00:00:00.000Z",
+          expiredAt: null,
+        },
+        message: "server error",
+        checkedAt: "2025-01-01T00:00:00.000Z",
+      }),
+    } as Response);
+
+    render(<ApiRouteHandlerDemo />);
+    fireEvent.click(screen.getByText("Load live status"));
+
+    await waitFor(() => {
+      expect(
+        screen.getByText("Request failed. Retry in a few seconds."),
+      ).toBeInTheDocument();
+    });
+  });
 });
