@@ -6,13 +6,13 @@
       "name": "basestack-flags-demos",
       "dependencies": {
         "@basestack/flags-react": "^1.2.0",
-        "@opennextjs/cloudflare": "^1.19.0",
+        "@opennextjs/cloudflare": "^1.19.1",
         "next": "16.2.3",
         "react": "19.2.5",
         "react-dom": "19.2.5",
       },
       "devDependencies": {
-        "@basestack/flags-cli": "^1.0.0",
+        "@basestack/flags-cli": "^1.0.1",
         "@biomejs/biome": "^2.4.11",
         "@tailwindcss/postcss": "^4.2.2",
         "@testing-library/jest-dom": "^6.9.1",
@@ -170,7 +170,7 @@
 
     "@babel/types": ["@babel/types@7.29.0", "", { "dependencies": { "@babel/helper-string-parser": "^7.27.1", "@babel/helper-validator-identifier": "^7.28.5" } }, "sha512-LwdZHpScM4Qz8Xw2iKSzS+cfglZzJGvofQICy7W7v4caru4EaAmyUuO6BGrbyQ2mYV11W0U8j5mBhd14dd3B0A=="],
 
-    "@basestack/flags-cli": ["@basestack/flags-cli@1.0.0", "", { "dependencies": { "@opentui/core": "^0.1.97", "@opentui/react": "^0.1.97", "react": "^19.2.5" }, "bin": { "flags-cli": "dist/bin.js" } }, "sha512-TmbQWW5oBU3Ye1a+7r5rm3o2A4r0TcgdhpQgG6S9pfdGYM2eahJMl1EloZiGhzSI/y+SWBPki9rLM69vdGFHig=="],
+    "@basestack/flags-cli": ["@basestack/flags-cli@1.0.1", "", { "dependencies": { "@opentui/core": "^0.1.97", "@opentui/react": "^0.1.97", "react": "^19.2.5" }, "bin": { "flags-cli": "dist/bin.js" } }, "sha512-Y8JpcDCuEOaLwE5S8bGuUdNJvJfPAaVeOt9zct+MFdEEI5X/qFUhUJSnWXDVdjGzJZjsH7hEoprY9Sd3tzxRZw=="],
 
     "@basestack/flags-js": ["@basestack/flags-js@1.2.0", "", {}, "sha512-tgEkgw7CkAHzxH7TtS7OWXTSxa9+4Eutk3x7IBGJtT+pMRzY/2nzmle4eGx/isWsZ5xjHXoV6LoF9LpYDq5sUA=="],
 
@@ -446,7 +446,7 @@
 
     "@opennextjs/aws": ["@opennextjs/aws@3.10.1", "", { "dependencies": { "@ast-grep/napi": "^0.40.5", "@aws-sdk/client-cloudfront": "3.984.0", "@aws-sdk/client-dynamodb": "3.984.0", "@aws-sdk/client-lambda": "3.984.0", "@aws-sdk/client-s3": "3.984.0", "@aws-sdk/client-sqs": "3.984.0", "@node-minify/core": "^8.0.6", "@node-minify/terser": "^8.0.6", "@tsconfig/node18": "^1.0.3", "aws4fetch": "^1.0.20", "chalk": "^5.6.2", "cookie": "^1.0.2", "esbuild": "0.25.4", "express": "^5.1.0", "path-to-regexp": "^6.3.0", "urlpattern-polyfill": "^10.1.0", "yaml": "^2.8.1" }, "peerDependencies": { "next": ">=15.5.15 || >=16.2.3" }, "bin": { "open-next": "dist/index.js" } }, "sha512-Pn8hLuP3M9EWlsZnS/O7Bm41Nt+lIOEsCaW/QJ3KlmIbtAeixnSj1CS80Z9PlQe/LQCe0GnQ8vGJeOdg5a4iWg=="],
 
-    "@opennextjs/cloudflare": ["@opennextjs/cloudflare@1.19.0", "", { "dependencies": { "@ast-grep/napi": "^0.40.5", "@dotenvx/dotenvx": "1.31.0", "@opennextjs/aws": "3.10.1", "cloudflare": "^4.4.1", "comment-json": "^4.5.1", "enquirer": "^2.4.1", "glob": "^12.0.0", "ts-tqdm": "^0.8.6", "yargs": "^18.0.0" }, "peerDependencies": { "next": ">=15.5.15 || >=16.2.3", "wrangler": "^4.65.0" }, "bin": { "opennextjs-cloudflare": "dist/cli/index.js" } }, "sha512-w7GeQlMmEFtaeo54mf7yV4K21EcMQOcdQj/CV1GTIijQd/ziIF5wErZqdsnw+BtgekkALY1zMQS6SWIhNcSBeQ=="],
+    "@opennextjs/cloudflare": ["@opennextjs/cloudflare@1.19.1", "", { "dependencies": { "@ast-grep/napi": "^0.40.5", "@dotenvx/dotenvx": "1.31.0", "@opennextjs/aws": "3.10.1", "cloudflare": "^4.4.1", "comment-json": "^4.5.1", "enquirer": "^2.4.1", "glob": "^12.0.0", "ts-tqdm": "^0.8.6", "yargs": "^18.0.0" }, "peerDependencies": { "next": ">=15.5.15 || >=16.2.3", "wrangler": "^4.65.0" }, "bin": { "opennextjs-cloudflare": "dist/cli/index.js" } }, "sha512-qW6ivDkwDzomX4uBTwIHiSFMvsXjZ2GuVf/GITxGByr8sA3eyx3IMfFjWyaqBHVqcqtJaCiFo8IPxpLHv0jWbg=="],
 
     "@opentui/core": ["@opentui/core@0.1.97", "", { "dependencies": { "bun-ffi-structs": "0.1.2", "diff": "8.0.2", "jimp": "1.6.0", "marked": "17.0.1", "yoga-layout": "3.2.1" }, "optionalDependencies": { "@dimforge/rapier2d-simd-compat": "^0.17.3", "@opentui/core-darwin-arm64": "0.1.97", "@opentui/core-darwin-x64": "0.1.97", "@opentui/core-linux-arm64": "0.1.97", "@opentui/core-linux-x64": "0.1.97", "@opentui/core-win32-arm64": "0.1.97", "@opentui/core-win32-x64": "0.1.97", "bun-webgpu": "0.1.5", "planck": "^1.4.2", "three": "0.177.0" }, "peerDependencies": { "web-tree-sitter": "0.25.10" } }, "sha512-2ENH0Dc4NUAeHeeQCQhF1lg68RuyntOUP68UvortvDqTz/hqLG0tIwF+DboCKtWi8Nmao4SAQEJ7lfmyQNEDOQ=="],
 
