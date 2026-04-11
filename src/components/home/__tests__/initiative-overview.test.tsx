@@ -107,4 +107,33 @@ describe("InitiativeOverview", () => {
       "border-warning/20",
     );
   });
+
+  it("applies surface styling for planned and unknown statuses", () => {
+    useFlagMock.mockReturnValue({
+      enabled: true,
+      payload: { variant: "x" },
+      error: null,
+      refresh: vi.fn(),
+      isLoading: false,
+      openFeedbackModal: vi.fn(),
+    });
+
+    const mixedItems = [
+      { name: "Alpha", description: "DA", status: "planned", progress: "10%" },
+      { name: "Beta", description: "DB", status: "unknown", progress: "20%" },
+    ];
+
+    render(<InitiativeOverview items={mixedItems} />);
+
+    expect(screen.getByText("planned")).toHaveClass(
+      "bg-surface-soft",
+      "text-muted",
+      "border-border",
+    );
+    expect(screen.getByText("unknown")).toHaveClass(
+      "bg-surface-soft",
+      "text-muted",
+      "border-border",
+    );
+  });
 });
