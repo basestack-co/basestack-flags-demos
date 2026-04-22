@@ -1,6 +1,7 @@
 "use client";
 
 import { useFlag } from "@basestack/flags-react/client";
+import { useEffect, useState } from "react";
 
 export type InitiativeItem = {
   name: string;
@@ -31,11 +32,19 @@ export function InitiativeOverview({ items }: InitiativeOverviewProps) {
     variant?: string;
   }>("initiative_overview");
 
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const isEnabled = mounted && enabled;
+
   return (
     <div className="panel rounded-2xl p-6">
       <div className="mb-5 flex items-center justify-between">
         <h2 className="font-display text-2xl">Initiative Overview</h2>
-        {enabled && (
+        {isEnabled && (
           <button
             onClick={() =>
               openFeedbackModal({
@@ -94,7 +103,7 @@ export function InitiativeOverview({ items }: InitiativeOverviewProps) {
               </div>
             </article>
           ))
-          .filter((_, index) => index < (enabled ? 3 : 1))}
+          .filter((_, index) => index < (isEnabled ? 3 : 1))}
       </div>
     </div>
   );

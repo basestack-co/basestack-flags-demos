@@ -1,6 +1,7 @@
 "use client";
 
 import { useFlag } from "@basestack/flags-react/client";
+import { useEffect, useState } from "react";
 
 type PreviewNotesProps = {
   points: string[];
@@ -11,7 +12,13 @@ export function PreviewNotes({ points }: PreviewNotesProps) {
     variant?: string;
   }>("preview_notes");
 
-  if (!enabled || isLoading) return null;
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted || !enabled || isLoading) return null;
 
   return (
     <aside className="panel rounded-2xl p-6">
