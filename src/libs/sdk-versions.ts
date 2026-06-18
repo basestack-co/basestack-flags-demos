@@ -1,18 +1,20 @@
-import { readFileSync } from "node:fs";
-import { join } from "node:path";
+function requireVersion(name: string, value: string | undefined): string {
+  if (!value) {
+    throw new Error(
+      `Missing ${name}. Run the app via Next.js so build-time env is set.`,
+    );
+  }
 
-function readInstalledVersion(packageName: string): string {
-  const packageJsonPath = join(
-    process.cwd(),
-    "node_modules",
-    packageName,
-    "package.json",
-  );
-
-  return JSON.parse(readFileSync(packageJsonPath, "utf8")).version as string;
+  return value;
 }
 
 export const sdkVersions = {
-  flagsReact: readInstalledVersion("@basestack/flags-react"),
-  flagsCli: readInstalledVersion("@basestack/flags-cli"),
+  flagsReact: requireVersion(
+    "BASESTACK_FLAGS_REACT_VERSION",
+    process.env.BASESTACK_FLAGS_REACT_VERSION,
+  ),
+  flagsCli: requireVersion(
+    "BASESTACK_FLAGS_CLI_VERSION",
+    process.env.BASESTACK_FLAGS_CLI_VERSION,
+  ),
 } as const;
