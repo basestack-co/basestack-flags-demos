@@ -39,6 +39,10 @@ vi.mock("@/components/home/runtime-demos", () => ({
   RuntimeDemos: () => <div data-testid="runtime-demos" />,
 }));
 
+vi.mock("@/components/home/sdk-versions-footer", () => ({
+  SdkVersionsFooter: () => <div data-testid="sdk-versions-footer" />,
+}));
+
 import Home from "@/app/page";
 
 describe("Home page", () => {
@@ -48,6 +52,7 @@ describe("Home page", () => {
     expect(screen.getByTestId("hero")).toBeInTheDocument();
     expect(screen.getByTestId("stats-grid")).toBeInTheDocument();
     expect(screen.getByTestId("runtime-demos")).toBeInTheDocument();
+    expect(screen.getByTestId("sdk-versions-footer")).toBeInTheDocument();
     expect(screen.getByTestId("initiative-overview")).toHaveTextContent("3");
     expect(screen.getByTestId("channel-mix")).toHaveTextContent("2");
     expect(screen.getByTestId("preview-notes")).toHaveTextContent("3");

@@ -6,6 +6,7 @@ import {
 } from "@/components/home/initiative-overview";
 import { PreviewNotes } from "@/components/home/preview-notes";
 import { RuntimeDemos } from "@/components/home/runtime-demos";
+import { SdkVersionsFooter } from "@/components/home/sdk-versions-footer";
 import { StatsGrid } from "@/components/home/stats-grid";
 
 const initiatives: InitiativeItem[] = [
@@ -55,6 +56,7 @@ export default function Home() {
           </div>
         </section>
         <RuntimeDemos />
+        <SdkVersionsFooter />
       </div>
     </main>
   );
