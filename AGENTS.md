@@ -3,7 +3,7 @@
 ## Package manager
 
 - Use `bun` for everything (`bun install`, `bun run <script>`, `bun add`).
-- `packageManager` is pinned to `bun@1.3.13`.
+- `packageManager` is pinned to `bun@1.4.2`.
 - Do NOT use `npm`, `yarn`, or `pnpm` — the lockfile is `bun.lock`.
 
 ## Dev server
