@@ -110,7 +110,6 @@ bun run test
 ```
 
 Component and runtime behavior are covered in:
-
 - `src/components/home/__tests__`
 - `src/app/actions/__tests__`
 - `src/app/api/route-handler-demo/__tests__`

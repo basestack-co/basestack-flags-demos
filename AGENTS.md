@@ -62,9 +62,9 @@
 
 ## Flags used in the demo
 
-| Slug                  | Used by          |
-| --------------------- | ---------------- |
-| `stats_grid`          | `StatsGrid`, route handler |
-| `initiative_overview` | `InitiativeOverview` |
-| `preview_notes`       | `PreviewNotes`   |
+| Slug                  | Used by                            |
+| --------------------- | ---------------------------------- |
+| `stats_grid`          | `StatsGrid`, route handler         |
+| `initiative_overview` | `InitiativeOverview`               |
+| `preview_notes`       | `PreviewNotes`                     |
 | `header`              | `ServerActionDemo` (server action) |
