@@ -25,7 +25,7 @@ Interactive demo project showing how to use `@basestack/flags-react` in a Next.j
 ## Prerequisites
 
 - Node.js `^22.22.2 || ^24.15.0 || >=26.0.0` (CI uses `24.15.0`)
-- Bun (the repo uses `bun.lock` and `packageManager: bun@1.4.2`)
+- Bun (the repo uses `bun.lock` and `packageManager: bun@1.4.4`)
 - A Basestack project/environment with valid API credentials
 - Cloudflare account + Wrangler auth for preview/deploy workflows
 
